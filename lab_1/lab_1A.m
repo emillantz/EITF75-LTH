@@ -6,12 +6,16 @@ addpath('MATLAB_FILES');
 %Playback HQmusic.wav at reconstruction freq. f_pb (Change f_pb according
 %to task)
 f_pb = f * 7;
-soundsc(y, f_pb);
+soundsc(y, f);
 
 %% Task 2
-%plot fft of HQmusic.wav signal
-Spectrum_PLOT(y, f)
-hold on 
+%plot time domain signal
+secs = length(y) / f;
+time = linspace(0, secs, length(y));
+plot(time, y)
+hold on
+%plot freq. domain signal
+Spectrum_PLOT(y, f);
 
 %% Task 3
 filter = 1/5*ones(5,1);
