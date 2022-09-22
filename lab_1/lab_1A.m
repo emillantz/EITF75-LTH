@@ -6,7 +6,7 @@ addpath('MATLAB_FILES');
 %Playback HQmusic.wav at reconstruction freq. f_pb (Change f_pb according
 %to task)
 f_pb = f * 7;
-soundsc(y, f);
+%soundsc(y, f);
 
 %% Task 2
 %plot time domain signal
@@ -22,6 +22,7 @@ filter = 1/5*ones(5,1);
 %discard first 4 samples of output
 u = conv(y, filter);
 u = u(5:end);
+%soundsc(u, f)
 Spectrum_PLOT(u, f)
 
 %% Task 4
