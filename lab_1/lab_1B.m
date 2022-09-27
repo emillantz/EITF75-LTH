@@ -5,7 +5,7 @@ addpath('MATLAB_FILES/');
 secs = length(y1) / f1;
 time = linspace(0, secs, length(y1));
 f_dist = f1 / 4;
-dist = (5 * sin(2*pi * f_dist .* time))';
+dist = (0.1 * sin(2*pi * f_dist .* time))';
 
 y1 = y1 + dist;
 
