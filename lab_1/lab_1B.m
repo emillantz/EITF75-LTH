@@ -52,7 +52,7 @@ soundsc(y2_f, f2)
 %% Task 10
 % Create echo
 [y,f] = audioread('MATLAB_FILES/speech1.wav');
-soundsc(y, f)
+%soundsc(y, f)
 delay = 50 / 340;
 alpha = 0.8;
 D = delay * f;
@@ -70,5 +70,5 @@ a_new = [1 / alpha, zeros(1, D), 1];
 b_new = 0*ones(1, length(a_new));
 b_new = poly(b_new);
 x = filter(b_new, a_new, u);
-%soundsc(x, f)
+soundsc(x, f)
 Spectrum_PLOT(x, f)
