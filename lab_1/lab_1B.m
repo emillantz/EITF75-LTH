@@ -4,10 +4,13 @@ addpath('MATLAB_FILES/');
 [y1, f1] = audioread('MATLAB_FILES/HQmusic.wav');
 secs = length(y1) / f1;
 time = linspace(0, secs, length(y1));
-f_dist = f1 / 4 * 0.1;
+f_dist = f1 / 4;
+dist = (5 * sin(2*pi * f_dist .* time))';
+
+y1 = y1 + dist;
 
 plot(time * f_dist, y1)
-%soundsc(y, f)
+soundsc(y1, f1)
 Spectrum_PLOT(y1, f1)
 %% Task 7
 load('test_filter.mat');
