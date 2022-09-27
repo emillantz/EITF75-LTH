@@ -1,3 +1,5 @@
+*.pyg
+*.gz
 *.asv
 *.mat
 *.aux
