@@ -16,13 +16,14 @@ Spectrum_PLOT(y1, f1)
 load('new_filter.mat');
 y1_f = filter(b, a, y1);
 Spectrum_PLOT(y1_f, f1)
+soundsc(y1_f, f1)
 
 %% Task 8
 [y2, f2] = audioread('MATLAB_FILES/distorted_music/lovesong.wav');
 %soundsc(y2, f2)
 Spectrum_PLOT(y2, f2)
-%signal spikes at ±0.12kHz, ±1.04kHz and ±3kHz
-zeroes = 1.0e+3*[-0.12, 0.12, -1.04, 1.04, -3, 3] / f2;
+%signal spikes at ±0.12kHz, ±1.04kHz, ±1.78kHz and ±3kHz
+zeroes = 1.0e+3*[-0.12, 0.12, -1.04, 1.04, -1.78, 1.78, -3, 3] / f2;
 zeroes = zeroes * (2 * pi);
 zeroes = exp(i * zeroes);
 %as many poles as zeroes
@@ -37,8 +38,8 @@ soundsc(y2_f, f2)
 [y2, f2] = audioread('MATLAB_FILES/distorted_music/lovesong.wav');
 %soundsc(y2, f2)
 Spectrum_PLOT(y2, f2)
-%signal spikes at ±0.12kHz, ±1.04kHz and ±3kHz
-zeroes = 1.0e+3*[-0.12, 0.12, -1.04, 1.04, -3, 3] / f2;
+%signal spikes at ±0.12kHz, ±1.04kHz, ±1.78kHz and ±3kHz
+zeroes = 1.0e+3*[-0.12, 0.12, -1.04, 1.04, -1.78, 1.78, -3, 3] / f2;
 zeroes = zeroes * (2 * pi);
 zeroes = exp(i * zeroes);
 %IIR notch, poles near zeroes
