@@ -16,26 +16,20 @@
 \usepackage{amsthm}
 \usepackage{ffcode}
 
-
 % Page size
 \textwidth=170mm
 \oddsidemargin=0mm
 \evensidemargin=\oddsidemargin
 \textheight=230mm
 \topmargin=-10mm
-
 %Section numbering
 \setcounter{secnumdepth}{-1}
 %opening
-\title{EITF75: Lab /number/ Report}
-\author{Student 1 name and Student 2 name}
+\title{EITF75: Lab 1A&B Report}
+\author{Ola Davidsson and Emil Lantz}
 \begin{document}
-
 \raggedright
 \maketitle
-Include all your solutions to the Preparation exercises and document your Lab 
-tasks. Use the red 'Include in lab report:' boxes in the lab instructions to make 
-sure you do not forget anything.
 \section{Preparation exercises}
 \subsection{Problem 1}
 \subsubsection{a}
@@ -69,16 +63,33 @@ Inserting this with f = 1/2 should give us
 H_{1}(f) = 1 =  b_0\frac{e^{j\pi}^2 + 1}{e^{j\pi}^2} = 2b_0 \xrightarrow{} b_0 = \frac{1}{2}
 \]
 \subsubsection{b}
-%plot pole zero av filtret
+\begin{figure}[H]
+    \hspace{-2.5cm}\includegraphics[scale = 0.3]{./images/pz-p1.jpg}
+    \caption{Pole-zero plot}
+\end{figure}
 \subsubsection{c}
-%plot mag o fas filtret. 0<f<0.5
+\begin{figure}[H]
+    \hspace{-40pt}\includegraphics[scale=0.28]{./images/prep-1c.jpg}
+    \caption{Magnitude and phase response plot for preparation exercise 1c}
+    \label{fig:my_label}
+\end{figure}
+
+\subsection{Problem 2}
+\subsubsection{a}
 \[
 H_{2}(f) = 1 =  b_0\frac{e^{j\pi}^2 + 1}{e^{j\pi}^2 + 0.95^2} \xrightarrow{} b_0 = 0.95125
 \]
 \subsubsection{b}
-%plot pole zero av filtret
+\begin{figure}[H]
+    \centering
+    \hspace{-60pt}\includegraphics[scale = 0.6]{./images/p2-pz.jpg}
+    \caption{Pole-zero plot}
+\end{figure}
 \subsubsection{c}
-%plot mag o fas filtret. 0<f<0.5
+\begin{figure}[H]
+    \hspace{-40pt}\includegraphics[scale=0.28]{./images/prep-2c.jpg}
+    \caption{Magnitude and phase response plot for preparation exercise 2c}
+\end{figure}
 Our filter is now more accurate on the frequency that we want to remove. Before we have a dampening effect on more than the area we want to dampen. 
 %Kolla skillnaden i fas graferna också. 
 
@@ -92,7 +103,12 @@ Which gives us
 h(n) = \delta(n) + \alpha\delta(n-D)
 \]
 \subsubsection{b}
-%plot magnitude och pole zero 
+Räkna ut freq. response
+\begin{figure}[H]
+    \hspace{-40pt}\includegraphics[scale=0.28]{./images/prep-3b.jpg}
+    \caption{Plot of magnitude response asked for in 3b}
+    \label{fig:my_label}
+\end{figure}
 \subsubsection{c}
 \[
 H(\omega)^{-1} = \frac{1}{1 + \alpha e^{-jwD}}
@@ -106,7 +122,12 @@ Which means we get D zeroes at Z = 0. And the poles at
 poles = \sqrt[D]{-\alpha}
 \]
 \subsubsection{d}
-%plot magnitude och pole zero, kolla skillnad. 
+%plot magnitude och pole zero, kolla skillnad.
+\begin{figure}[H]
+    \hspace{-45pt}\includegraphics[scale=0.28]{./images/prep-3d.jpg}
+    \caption{Caption}
+    \label{fig:my_label}
+\end{figure}
 \subsubsection{e}
 As long as 
 \[
@@ -234,15 +255,151 @@ Skriv nåt om polplacering
 \end{figure}
 Skriv nåt om polerna + något om pol från $\omega = 0$ till $\omega = \pi$
 \subsection{Lab Task 6}
-For task 6, the the same audio file used in previous tasks ('HQmusic.wav') was used. A sinusoid distortion was added in MATLAB. Figure 8 contains the power spectral density-plot of the distorted signal.
+For task 6, the the same audio file used in previous tasks ('HQmusic.wav') was used. A sinusoid distortion with frequency $\frac{F_s}{4}$ was added in MATLAB. Figure 8 contains the power spectral density-plot of the distorted signal.
 \begin{figure}[H]
     \hspace{-50pt}\includegraphics[scale=0.28]{./images/Task6-FFT.jpg}
     \caption{Frequency domain plot of the distorted signal created in task 6}
     \label{fig:my_label}
 \end{figure}
+Looking at the frequency domain signal, one can see clear spikes at $\sim$11 kHz, which corresponds to $\frac{F_s}{4}$ (where $F_s = 44100$kHz), as intended.
 \subsection{Lab Task 7}
+For task 7, a simple FIR filter with zeroes in \pm$\frac{\pi}{2}$ was constructed using the mkiir command in MATLAB. Since no poles were added, the signal quality decreased in a large band around the filtered frequencies ($\frac{F_s}{4}$). A frequency domain plot of the filtered signal can be found in figure 9.
+\begin{figure}[H]
+    \includegraphics[scale=0.28]{./images/Task7-filtered.jpg}
+    \caption{Signal plot after applying the FIR-filter constructed in task 7}
+    \label{fig:my_label}
+\end{figure}
 \subsection{Lab Task 8}
+For task 8, a FIR-filter was constructed. For this task a new (distorted) audio file was imported to MATLAB and plotted.
+\begin{ffcode}
+%% Task 8
+[y2, f2] = audioread('MATLAB_FILES/distorted_music/lovesong.wav');
+%soundsc(y2, f2)
+Spectrum_PLOT(y2, f2)
+\end{ffcode}
+The plot can be seen in figure 10
+\begin{figure}[H]
+    \hspace{-40pt}\includegraphics[scale=0.28]{./images/Task8-double-plot.jpg}
+    \caption{Filtered music (blue) compared to non-filtered (red).}
+    \label{fig:my_label}
+\end{figure}
+
+At first sight just studying the unfiltered signal, there's a distortion at $\pm$3kHz. After removing this, the high pitch noise in the signal could no longer be heard. Unfortunately there was some distortion at $\pm$1.78kHz, $\pm$1.04kHz and $\pm$0.12kHz. These distortions were removed in MATLAB:
+\begin{ffcode}
+%signal spikes at ±0.12kHz, ±1.04kHz, ±1.78kHz and ±3kHz
+zeroes = 1.0e+3*[-0.12, 0.12, -1.04, 1.04, -1.78, 1.78, -3, 3] / f2;
+zeroes = zeroes * (2 *  pi);
+zeroes = exp(i * zeroes);
+%as many poles as zeroes
+poles = 0 * ones(1, length(zeroes));
+b = poly(zeroes);
+a = poly(poles);
+y2_f = filter(b, a, y2);
+Spectrum_PLOT(y2_f, f2);
+soundsc(y2_f, f2)
+Spectrum_DoublePLOT(y2, y2_f, f2)
+\end{ffcode}
+Removing these distortions  cleared the signal from most of the noise that was being heard. Even though there still a one tone noise in the background, the music quality was pretty good. You can also see the 2 high spikes in the unfiltered signal (red), and how they are absent from the filtered blue line. 
+
 \subsection{Lab Task 9}
+For task 9, the previous FIR-filter was replaced with an IIR-notch-filter with poles near the zeroes.
+\begin{ffcode}
+%% Task 9
+[y2, f2] = audioread('MATLAB_FILES/distorted_music/lovesong.wav');
+%soundsc(y2, f2)
+Spectrum_PLOT(y2, f2)
+%signal spikes at ±0.12kHz, ±1.04kHz, ±1.78kHz and ±3kHz
+zeroes = 1.0e+3*[-0.12, 0.12, -1.04, 1.04, -1.78, 1.78, -3, 3] / f2;
+zeroes = zeroes * (2 * pi);
+zeroes = exp(i * zeroes);
+%IIR notch, poles near zeroes
+poles = 0.95 * zeroes;
+b = poly(zeroes);
+a = poly(poles);
+y2_f = filter(b, a, y2);
+Spectrum_PLOT(y2_f, f2);
+soundsc(y2_f, f2)
+Spectrum_DoublePLOT(y2, y2_f, f2)
+\end{ffcode}
+\begin{figure}[H]
+    \hspace{-40pt}\includegraphics[scale=0.28]{./images/Task9-double-plot.jpg}
+    \caption{Filtered music (blue) compared to non-filtered (red).}
+    \label{fig:my_label}
+\end{figure}
+
+
+The music in Task 9 compared to Task 8 sounds fuller as well as louder. Listening to filtered music with more and more zeroes placed had the same effect as in task 8. 
+
 \subsection{Lab Task 10}
+For task 10, an echo corresponding to sound traveling 50m 
+The delay in seconds was calculated as $t = \frac{distance}{time} = \frac{50}{340}$. This was then converted to samples by multiplying with the sample speed $D = t \cdot F_s$. A filter was constructed in MATLAB according to these calculations. The original and filtered signals were plotted and can be seen in figure 12.
+\begin{ffcode}
+%% Task 10
+% Create echo
+[y,f] = audioread('MATLAB_FILES/speech1.wav');
+%soundsc(y, f)
+delay = 50 / 340;
+alpha = 0.8;
+D = delay * f;
+D = round(D);
+b = [1, zeros(1, D), alpha];
+poles = 0*ones(1, length(b));
+a = poly(poles);
+u = filter(b, a, y);
+%create time vector
+time = length(y) / f;
+time = linspace(0, time, length(y));
+
+%plot original signal (time domain)
+subplot(2, 1, 1)
+plot(time * f, y)
+%plot echoed signal (time domain)
+subplot(2, 1, 2)
+plot(time * f, u)
+%plot echoed signal (freq. domain)
+Spectrum_PLOT(u, f)
+%soundsc(u, f)
+\end{ffcode}
+
+\begin{figure}[H]
+    \hspace{-40pt}\includegraphics[scale=0.28]{./images/Task10-Echo.jpg}
+    \caption{Original signal (top) and signal with applied echo (bottom).}
+    \label{fig:my_label}
+\end{figure}
+
+ 
+
+Comparing the two signals in figure 12, one can see both signs of the echo and patterns of constructive interference. One clear instance of interference can be seen in the second part of the signals, where the amplitude of the filtered (echoed) signal is much larger than the original.
+
 \subsection{Lab Task 11}
+The echo was removed from the signal in task 11 by inverse filtering. A new filter was constructed with poles in the "echo-filters" zeroes to nullify the echo.  
+\begin{ffcode}
+%% Task 11
+%create time vector
+time = length(y) / f;
+time = linspace(0, time, length(y));
+
+% Remove echo by inverse filtering
+a_new = [1, zeros(1, D), alpha];
+b_new = 0*ones(1, length(a_new));
+b_new = poly(b_new);
+x = filter(b_new, a_new, u);
+subplot(2, 2, 1, 'replace')
+plot(time * f, y)
+subplot(2, 2, 3)
+plot(time * f, u)
+subplot(2, 2, 2)
+plot(time * f, x)
+soundsc(x, f)
+Spectrum_PLOT(x, f)
+\end{ffcode}
+
+\begin{figure}[H]
+    \hspace{-40pt}\includegraphics[scale=0.28]{./images/Task11.jpg}
+    \caption{Original signal (top left), signal with applied echo (bottom) and signal with echo removed (top right.}
+    \label{fig:my_label}
+\end{figure}
+
+We can see that inverse filtering brought back the original signal, however there are some minimal differences in amplitude. This is however, not discernible when listening to the signals side by side, meaning that it is likely a good filter for audio processing.
+
 \end{document}
