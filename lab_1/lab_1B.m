@@ -67,20 +67,30 @@ time = length(y) / f;
 time = linspace(0, time, length(y));
 
 %plot original signal (time domain)
-subplot(2, 1, 1)
-plot(time * f, y)
+%subplot(2, 1, 1)
+%plot(time * f, y)
 %plot echoed signal (time domain)
-subplot(2, 1, 2)
-plot(time * f, u)
+%subplot(2, 1, 2)
+%plot(time * f, u)
 %plot echoed signal (freq. domain)
 Spectrum_PLOT(u, f)
 %soundsc(u, f)
 
 %% Task 11
+%create time vector
+time = length(y) / f;
+time = linspace(0, time, length(y));
+
 % Remove echo by inverse filtering
-a_new = [1 / alpha, zeros(1, D), 1];
+a_new = [1, zeros(1, D), alpha];
 b_new = 0*ones(1, length(a_new));
 b_new = poly(b_new);
 x = filter(b_new, a_new, u);
+subplot(2, 2, 1, 'replace')
+plot(time * f, y)
+subplot(2, 2, 3)
+plot(time * f, u)
+subplot(2, 2, 2)
+plot(time * f, x)
 soundsc(x, f)
 Spectrum_PLOT(x, f)
