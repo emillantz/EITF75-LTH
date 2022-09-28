@@ -1,7 +1,6 @@
 *.pyg
 *.gz
 *.asv
-*.mat
 *.aux
 *.fdb_latexmk
 *.fls

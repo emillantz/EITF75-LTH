@@ -13,7 +13,7 @@ plot(time * f_dist, y1)
 soundsc(y1, f1)
 Spectrum_PLOT(y1, f1)
 %% Task 7
-load('test_filter.mat');
+load('new_filter.mat');
 y1_f = filter(b, a, y1);
 Spectrum_PLOT(y1_f, f1)
 
