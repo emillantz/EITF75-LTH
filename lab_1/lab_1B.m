@@ -88,7 +88,7 @@ b_new = poly(b_new);
 x = filter(b_new, a_new, u);
 subplot(2, 2, 1, 'replace')
 plot(time * f, y)
-subplot(2, 2, 3)
+subplot(2, 2, 3:4)
 plot(time * f, u)
 subplot(2, 2, 2)
 plot(time * f, x)
