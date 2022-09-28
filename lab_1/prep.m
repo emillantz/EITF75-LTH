@@ -7,6 +7,7 @@ zplane(zeroes, poles)
 hold on
 [h, w] = freqz(zeroes, poles);
 [phi, omega] = phasez(zeroes, poles);
+freqz(zeroes, poles, 'half')
 x1 = linspace(0, 1/2, length(h));
 x2 = linspace(0, 1/2, length(phi))
 figure(2)
@@ -35,7 +36,7 @@ hold on
 [h, w] = freqz(zeroes, poles);
 [phi, omega] = phasez(zeroes, poles);
 x1 = linspace(0, 1/2, length(h));
-x2 = linspace(0, 1/2, length(phi))
+x2 = linspace(0, 1/2, length(phi));
 figure(2)
 %plot magnitude respone
 subplot(2, 1, 1)
@@ -51,6 +52,24 @@ xlabel('f')
 ylabel('deg')
 xlim([0 1/2])
 
-%% Problem 3
+%% Problem 3b
 clear
-% b
+D = 5;
+alpha = 0.8;
+b = [1, zeros(1, D), alpha];
+a = zeros(1, length(b));
+poles = poly(a);
+figure(1)
+freqz(b, poles)
+[h, w] = freqz(b, poles);
+figure(2)
+plot(w / pi, 20*log10(abs(h)))
+
+%% Problem 3d
+clear
+D = 5;
+alpha = 0.8;
+a = [1, zeros(1, D), alpha];
+b = zeros(1, length(a));
+zeroes = poly(b);
+freqz(zeroes, a)
