@@ -24,7 +24,7 @@ soundsc(y1_f, f1)
 Spectrum_PLOT(y2, f2)
 %signal spikes at ±0.12kHz, ±1.04kHz, ±1.78kHz and ±3kHz
 zeroes = 1.0e+3*[-0.12, 0.12, -1.04, 1.04, -1.78, 1.78, -3, 3] / f2;
-zeroes = zeroes * (2 * pi);
+zeroes = zeroes * (2 *  pi);
 zeroes = exp(i * zeroes);
 %as many poles as zeroes
 poles = 0 * ones(1, length(zeroes));
@@ -33,7 +33,7 @@ a = poly(poles);
 y2_f = filter(b, a, y2);
 Spectrum_PLOT(y2_f, f2);
 soundsc(y2_f, f2)
-
+Spectrum_DoublePLOT(y2, y2_f, f2)
 %% Task 9
 [y2, f2] = audioread('MATLAB_FILES/distorted_music/lovesong.wav');
 %soundsc(y2, f2)
@@ -49,7 +49,7 @@ a = poly(poles);
 y2_f = filter(b, a, y2);
 Spectrum_PLOT(y2_f, f2);
 soundsc(y2_f, f2)
-
+Spectrum_DoublePLOT(y2, y2_f, f2)
 %% Task 10
 % Create echo
 [y,f] = audioread('MATLAB_FILES/speech1.wav');
@@ -62,6 +62,17 @@ b = [1, zeros(1, D), alpha];
 poles = 0*ones(1, length(b));
 a = poly(poles);
 u = filter(b, a, y);
+%create time vector
+time = length(y) / f;
+time = linspace(0, time, length(y));
+
+%plot original signal (time domain)
+subplot(2, 1, 1)
+plot(time * f, y)
+%plot echoed signal (time domain)
+subplot(2, 1, 2)
+plot(time * f, u)
+%plot echoed signal (freq. domain)
 Spectrum_PLOT(u, f)
 %soundsc(u, f)
 
