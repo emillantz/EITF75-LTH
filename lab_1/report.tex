@@ -103,7 +103,9 @@ Which gives us
 h(n) = \delta(n) + \alpha\delta(n-D)
 \]
 \subsubsection{b}
-Räkna ut freq. response
+\[
+H(\omega) = 1 + \alpha e^{-jwD}
+\]
 \begin{figure}[H]
     \hspace{-40pt}\includegraphics[scale=0.28]{./images/prep-3b.jpg}
     \caption{Plot of magnitude response asked for in 3b}
@@ -122,7 +124,9 @@ Which means we get D zeroes at Z = 0. And the poles at
 poles = \sqrt[D]{-\alpha}
 \]
 \subsubsection{d}
-%plot magnitude och pole zero, kolla skillnad.
+\[
+H(\omega)^{-1} = \frac{1}{1 + 0.8 e^{-5jw}}
+\]
 \begin{figure}[H]
     \hspace{-45pt}\includegraphics[scale=0.28]{./images/prep-3d.jpg}
     \caption{Caption}
@@ -130,9 +134,9 @@ poles = \sqrt[D]{-\alpha}
 \end{figure}
 \subsubsection{e}
 As long as 
-\[
+$
 |\alpha| < 1
-\]
+$
 
 \section{Laboratory tasks}
 
@@ -151,7 +155,7 @@ soundsc(y, f);
 
 It was noted that changing the reconstruction frequency ("f\_pb" in code) to half of the sampling frequency ($\frac{F_s}{2}$) both lowered the volume and made the pitch sound lower. Changing f\_pb to $2F_s$ had the opposite effect on the pitch.
 \subsection{Lab Task 2}
-The signal yielded from task 1 was plotted, both in the time and frequency domain. Time domain signal can be seen in figure 1 and the frequency domain signal can be seen in figure 2.
+The signal yielded from task 1 was plotted, both in the time and frequency domain. Time domain signal can be seen in figure 7 and the frequency domain signal can be seen in figure 8.
 
 \begin{ffcode} 
 %% Task 2
@@ -179,7 +183,7 @@ Spectrum_PLOT(y, f);
 \end{figure}
 
 
-As can be seen in figure 2, the most prominent (largest) frequency component was 120 Hz. Since the audio was bass-heavy music, this is a reasonable result.
+As can be seen in figure 8, the most prominent (largest) frequency component was 120 Hz. Since the audio was bass-heavy music, this is a reasonable result.
 
 \subsection{Lab Task 3}
 For task 3, a simple moving-average filter was applied to HQmusic.wav's signal. The following MATLAB code was used to apply the filter:
@@ -194,14 +198,14 @@ soundsc(u, f)
 Spectrum_PLOT(u, f)
 \end{ffcode}
 
-The filtered signal can be seen in figure 3.
+The filtered signal can be seen in figure 9.
 \begin{figure}[H]
     \centering
     \hspace{-60pt}\includegraphics[scale = 0.28]{./images/Task3-filtered.jpg}
     \caption{Frequency domain plot of HQmusic.wav's signal, with a moving average filter applied}
     \label{fig:my_label}
 \end{figure}
-This filter removed more of the signals higher frequencies (treble). This is due to the filter taking the average amplitude of frequencies over 5 samples. Since higher frequencies are less prominent in the audio (as seen in figure 2), these frequencies are filtered. Increasing the length from 5 to 15 amplified this effect. Removing even more of the higher signals, leaving mostly bass.
+This filter removed more of the signals higher frequencies (treble). This is due to the filter taking the average amplitude of frequencies over 5 samples. Since higher frequencies are less prominent in the audio (as seen in figure 8), these frequencies are filtered. Increasing the length from 5 to 15 amplified this effect. Removing even more of the higher signals, leaving mostly bass.
 
 Differences between the linear plots before and after the filter are minimal. The log-plotted figures, however, have notable dips around 8.9 kHz. The valleys starting at 15 kHz have a more rounded appearance after the filter.
 \subsection{Lab Task 4}
@@ -213,7 +217,7 @@ y_noisy = y + 0.1*randn(length(y), 1);
 %soundsc(y_noisy, f)
 Spectrum_PLOT(y_noisy, f)
 \end{ffcode}
-in MATLAB. The signal with added noise can be seen in figure 4.
+in MATLAB. The signal with added noise can be seen in figure 10.
 \begin{figure}[H]
     \hspace{-55pt}\includegraphics[scale=0.28]{./images/Task4-noisy.jpg}
     \caption{HQmusic.wav's signal with an added Gaussian white noise}
@@ -229,10 +233,10 @@ u_noisy = u_noisy(5:end);
 soundsc(u_noisy, f)
 Spectrum_PLOT(u_noisy, f)
 \end{ffcode}
-The plot of the filtered signal can be seen in figure 5
+The plot of the filtered signal can be seen in figure 11.
 \begin{figure}[H]
     \hspace{-40pt}\includegraphics[scale=0.28]{./images/Task4-filtered}
-    \caption{Signal from figure 4, passed through a moving average filter of length 5}
+    \caption{Signal from figure 10, passed through a moving average filter of length 5}
     \label{fig:my_label}
 \end{figure}
 % Nollställen i n*fs / 5 pga faltning med 1/5
@@ -246,16 +250,19 @@ As can be seen, the filter reduced the amplitude of the noise considerably (thou
     \caption{Side by side comparison of IIR-filter with poles in origin (left) and poles near zeroes (right)}
     \label{fig:my_label}
 \end{figure}
-Skriv nåt om polplacering
+As can be seen, placing poles closer to zeros rather than in origin causes them to have a lesser effect outside the targeted frequency.  
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.6]{./images/2ndorder-pole.png}
     \caption{Second order pole placed on the unit circle}
     \label{fig:my_label}
 \end{figure}
-Skriv nåt om polerna + något om pol från $\omega = 0$ till $\omega = \pi$
+
+Placing the poles on the unit circle will cause the system to be unstable.
+
+Changing the $\omega$ from 0 to $\pi$ will only change the frequency where we attenuate. 
 \subsection{Lab Task 6}
-For task 6, the the same audio file used in previous tasks ('HQmusic.wav') was used. A sinusoid distortion with frequency $\frac{F_s}{4}$ was added in MATLAB. Figure 8 contains the power spectral density-plot of the distorted signal.
+For task 6, the the same audio file used in previous tasks ('HQmusic.wav') was used. A sinusoid distortion with frequency $\frac{F_s}{4}$ was added in MATLAB. Figure 14 contains the power spectral density-plot of the distorted signal.
 \begin{figure}[H]
     \hspace{-50pt}\includegraphics[scale=0.28]{./images/Task6-FFT.jpg}
     \caption{Frequency domain plot of the distorted signal created in task 6}
@@ -263,9 +270,9 @@ For task 6, the the same audio file used in previous tasks ('HQmusic.wav') was u
 \end{figure}
 Looking at the frequency domain signal, one can see clear spikes at $\sim$11 kHz, which corresponds to $\frac{F_s}{4}$ (where $F_s = 44100$kHz), as intended.
 \subsection{Lab Task 7}
-For task 7, a simple FIR filter with zeroes in \pm$\frac{\pi}{2}$ was constructed using the mkiir command in MATLAB. Since no poles were added, the signal quality decreased in a large band around the filtered frequencies ($\frac{F_s}{4}$). A frequency domain plot of the filtered signal can be found in figure 9.
+For task 7, a simple FIR filter with zeroes in \pm$\frac{\pi}{2}$ was constructed using the mkiir command in MATLAB. Since no poles were added, the signal quality decreased in a large band around the filtered frequencies ($\frac{F_s}{4}$). A frequency domain plot of the filtered signal can be found in figure 15.
 \begin{figure}[H]
-    \includegraphics[scale=0.28]{./images/Task7-filtered.jpg}
+    \hspace{-45pt}\includegraphics[scale=0.28]{./images/Task7-filtered.jpg}
     \caption{Signal plot after applying the FIR-filter constructed in task 7}
     \label{fig:my_label}
 \end{figure}
@@ -277,7 +284,7 @@ For task 8, a FIR-filter was constructed. For this task a new (distorted) audio 
 %soundsc(y2, f2)
 Spectrum_PLOT(y2, f2)
 \end{ffcode}
-The plot can be seen in figure 10
+The plot can be seen in figure 16
 \begin{figure}[H]
     \hspace{-40pt}\includegraphics[scale=0.28]{./images/Task8-double-plot.jpg}
     \caption{Filtered music (blue) compared to non-filtered (red).}
@@ -331,8 +338,8 @@ Spectrum_DoublePLOT(y2, y2_f, f2)
 The music in Task 9 compared to Task 8 sounds fuller as well as louder. Listening to filtered music with more and more zeroes placed had the same effect as in task 8. 
 
 \subsection{Lab Task 10}
-For task 10, an echo corresponding to sound traveling 50m 
-The delay in seconds was calculated as $t = \frac{distance}{time} = \frac{50}{340}$. This was then converted to samples by multiplying with the sample speed $D = t \cdot F_s$. A filter was constructed in MATLAB according to these calculations. The original and filtered signals were plotted and can be seen in figure 12.
+For task 10, an echo corresponding to sound traveling 50m was added to a signal.
+The delay in seconds was calculated as $t = \frac{distance}{time} = \frac{50}{340}$. This was then converted to samples by multiplying with the sample speed $D = t \cdot F_s$. A filter was constructed in MATLAB according to these calculations. The original and filtered signals were plotted and can be seen in figure 18.
 \begin{ffcode}
 %% Task 10
 % Create echo
@@ -369,7 +376,7 @@ Spectrum_PLOT(u, f)
 
  
 
-Comparing the two signals in figure 12, one can see both signs of the echo and patterns of constructive interference. One clear instance of interference can be seen in the second part of the signals, where the amplitude of the filtered (echoed) signal is much larger than the original.
+Comparing the two signals in figure 18, one can see both signs of the echo and patterns of constructive interference. One clear instance of interference can be seen in the second part of the signals, where the amplitude of the filtered (echoed) signal is much larger than the original.
 
 \subsection{Lab Task 11}
 The echo was removed from the signal in task 11 by inverse filtering. A new filter was constructed with poles in the "echo-filters" zeroes to nullify the echo.  
