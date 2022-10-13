@@ -1,4 +1,4 @@
-%% New Task 4
+%% Task 4
 clc; clear; addpath('./functions/')
 N = 64;
 L = 6; %idfk
@@ -27,7 +27,7 @@ for i=1:length(alpha)
         "from figure 3, and x(n) (α = %.2f): %.3f \n\n", alpha(i), error);
 end
 
-%% Task 5 new
+%% Task 5
 for i=1:length(alpha)
     H_z = [1, alpha(i)];
 
