@@ -17,7 +17,7 @@ stem(data)
 title('transmit bits x(n)')
 
 for i = 1:length(alpha)
-recv = trim(conv(data, [1 alpha(i)]));
+recv = trim_end(conv(data, [1 alpha(i)]));
 subplot(4, 1, i+1)
 stem(recv)
 title(sprintf('Reciever signal (α = %.2f)', alpha(i)))
@@ -50,7 +50,6 @@ for i=1:length(alpha)
         alpha(i), diff_yt)
 
     diff_yr = bits_diff(restructure(y_r_noisy), data);
-    fprintf("Diff between restructured y(r) and x(n) (α = %.2f): %.3f \n", ...
+    fprintf("Diff between restructured y(r) and x(n) (α = %.2f): %.3f \n\n", ...
         alpha(i), diff_yr)
-    fprintf("\n")
 end
