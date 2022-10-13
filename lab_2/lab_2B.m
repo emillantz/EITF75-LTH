@@ -28,6 +28,7 @@ for i=1:length(alpha)
 end
 
 %% Task 5
+% THIS IS PROBABLY NOT RIGHT HANDLE WITH CARE
 for i=1:length(alpha)
     H_z = [1, alpha(i)];
 
