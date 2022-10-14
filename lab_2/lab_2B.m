@@ -1,7 +1,7 @@
 %% Task 4
 clc; clear; addpath('./functions/')
 N = 64;
-L = 6; %idfk
+L = 2;
 x_n = rand(1, N);
 x_n = zeroOne(x_n);
 alpha = [0 0.5 -0.99];
@@ -17,7 +17,7 @@ for i=1:length(alpha)
     r_n = conv(s_n, H_z);
     rf_n = r_n(L:end-(L-1));
     y_n = fft(rf_n, N);
-    h_n = [1, alpha(i), zeros(1, 62)];
+    h_n = [1, alpha(i)];
 
     H_k = fft(h_n, N);
     xn_fig4 = y_n ./ H_k;

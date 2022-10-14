@@ -10,7 +10,7 @@ figure(2)
 stem(data(1:64))
 title('Transmit bits, x(n)')
 %% Task 2
-alpha = [0, 0.5, 0.99];
+alpha = [0, 0.5, -0.99];
 figure(3)
 subplot(4, 1, 1)
 stem(data)
@@ -46,10 +46,10 @@ for i=1:length(alpha)
     y_r_noisy = filter(1, H_z, noise(receiver_hr, 0.25));
 
     diff_yt = bits_diff(restructure(y_t_noisy), data);
-    fprintf("Diff between restructured y(t) and x(n) (α = %.2f): %.3f \n", ...
+    fprintf("Diff between restructured y_t(n) and x(n) (α = %.2f): %.3f \n", ...
         alpha(i), diff_yt)
 
     diff_yr = bits_diff(restructure(y_r_noisy), data);
-    fprintf("Diff between restructured y(r) and x(n) (α = %.2f): %.3f \n\n", ...
+    fprintf("Diff between restructured y_r(n) and x(n) (α = %.2f): %.3f \n\n", ...
         alpha(i), diff_yr)
 end
