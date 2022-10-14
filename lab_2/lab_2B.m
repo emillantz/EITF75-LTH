@@ -43,7 +43,7 @@ for i=1:length(alpha)
     xn_noise = y_n ./ H_k;
 
     error = bits_diff(sign(real(xn_noise)), x_n);
-    count = count + error;
+    
     fprintf("Difference between Re(x(n)) using model " + ...
          "from figure 4, and x(n) (α = %.2f): %.3f \n\n", alpha(i), error);
 
