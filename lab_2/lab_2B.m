@@ -35,12 +35,11 @@ for i=1:length(alpha)
     r_n = conv(s_n, H_z);
     rf_n = r_n(L:end-(L-1));
     y_n = fft(rf_n, N);
-    h_n = [1, alpha(i), zeros(1, 62)];
 
-    H_k = fft(h_n, N);
+    H_k = fft(H_z, N);
 
     rn_noise = noise(r_n, 0.5/64);
-    rn_restruct = restructure(real(rn_noise));
+    rn_restruct = sign(real(rn_noise));
     rf_n = rn_restruct(L:end-(L-1));
     
     yn_noise = fft(rf_n, N);

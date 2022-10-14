@@ -22,7 +22,7 @@ subplot(4, 1, i+1)
 stem(recv)
 title(sprintf('Reciever signal (α = %.2f)', alpha(i)))
 end
-%% Alternate task 3
+%% Task 3
 
 for i=1:length(alpha)
     H_z = [1, alpha(i)];
