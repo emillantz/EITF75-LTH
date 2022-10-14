@@ -28,26 +28,23 @@ for i=1:length(alpha)
 end
 
 %% Task 5
-% THIS IS PROBABLY NOT RIGHT HANDLE WITH CARE
 for i=1:length(alpha)
     H_z = [1, alpha(i)];
 
     r_n = conv(s_n, H_z);
-    rf_n = r_n(L:end-(L-1));
+    rn_noise = noise(r_n, 0.25/64);
+
+    rf_n = rn_noise(L:end-(L-1));
     y_n = fft(rf_n, N);
     
-    h_n = [1, alpha(i), zeros(1, 62)];
+    h_n = [1, alpha(i), zeros(1, N-2)];
     H_k = fft(h_n, N);
 
-    rn_noise = noise(r_n, 0.5/64);
-    rn_restruct = sign(real(rn_noise));
-    rf_n = rn_restruct(L:end-(L-1));
-    
-    yn_noise = fft(rf_n, N);
-    xn_noise = yn_noise ./ H_k;
+    xn_noise = y_n ./ H_k;
 
     error = bits_diff(sign(real(xn_noise)), x_n);
+    count = count + error;
     fprintf("Difference between Re(x(n)) using model " + ...
-        "from figure 4, and x(n) (α = %.2f): %.3f \n\n", alpha(i), error);
+         "from figure 4, and x(n) (α = %.2f): %.3f \n\n", alpha(i), error);
 
 end
