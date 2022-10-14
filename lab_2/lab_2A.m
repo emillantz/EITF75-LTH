@@ -23,8 +23,6 @@ stem(recv)
 title(sprintf('Reciever signal (α = %.2f)', alpha(i)))
 end
 %% Task 3
-count = 0;
-for i=1:100
 for i=1:length(alpha)
     H_z = [1, alpha(i)];
     H_t = filter(1, H_z, data);
@@ -54,5 +52,4 @@ for i=1:length(alpha)
     fprintf("Diff between restructured y_r(n) and x(n) (α = %.2f): %.3f \n\n", ...
         alpha(i), diff_yr)
 count = count + diff_yr;
-end
 end
