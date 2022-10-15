@@ -51,5 +51,4 @@ for i=1:length(alpha)
     diff_yr = bits_diff(restructure(y_r_noisy), data);
     fprintf("Diff between restructured y_r(n) and x(n) (α = %.2f): %.3f \n\n", ...
         alpha(i), diff_yr)
-count = count + diff_yr;
 end
