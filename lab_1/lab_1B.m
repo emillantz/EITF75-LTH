@@ -59,7 +59,7 @@ alpha = 0.8;
 D = delay * f;
 D = round(D);
 b = [1, zeros(1, D), alpha];
-poles = 0*ones(1, length(b));
+poles = zeros(1, length(b));
 a = poly(poles);
 u = filter(b, a, y);
 %create time vector
@@ -83,7 +83,7 @@ time = linspace(0, time, length(y));
 
 % Remove echo by inverse filtering
 a_new = [1, zeros(1, D), alpha];
-b_new = 0*ones(1, length(a_new));
+b_new = zeros(1, length(a_new));
 b_new = poly(b_new);
 x = filter(b_new, a_new, u);
 subplot(2, 2, 1, 'replace')
